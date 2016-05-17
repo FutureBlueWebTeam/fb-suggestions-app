@@ -1,0 +1,10 @@
+{
+  "name": "fb-suggestions-app",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "http": "0.0.0"
+  }
+}
