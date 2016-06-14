@@ -1,0 +1,76 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+	</head>
+	<body>
+		<div class='container'>
+			<h1> Hello </h1>
+			<form id="createUser">
+  				<fieldset class="form-group">
+    				<label for="un">Username</label>
+    				<input type="text" class="form-control" id="un" placeholder="Username">
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="pw">Password</label>
+					<input type="password" class="form-control" id="pw" placeholder="Password">
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="loc">Location</label>
+					<input type="text" class="form-control" id="loc"/>
+				</fieldset>
+				<input type="submit"></input>
+			</form>
+			
+			<% if (user) { %>
+				<table class="table"> 
+					<thead>
+						<tr>
+							<th> Username </th>
+							<th> Password </th> 
+							<th> Location </th>
+						</tr>
+					</thead>
+					<tbody>
+						<% data.forEach(function(row) { %>
+							<tr>
+								<th><%= row.USERNAME %></th>
+								<th><%= row.PASSWORD %></th>
+								<th><%= row.LOCATION %></th>
+							</tr>
+						<% }); %>		
+					</tbody>
+				</table>	
+			<% } %>
+		</div>
+	</body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
+	<script type="text/javascript" src="/js/locationpicker.jquery.js"></script>
+	<script type="text/javascript"> 
+		$("#createUser").submit(function() {
+			
+			var username = $("#un").val();
+			var password = $("#pw").val();
+			var loc = $("#loc").val();
+			
+			$.ajax({
+				type: "POST",
+  				url: "/login/newUser",
+  				data: { 
+					username: username,
+					password: password, 
+					loc: loc
+				}
+			});
+		});
+	</script>
+	<script>
+		$('#loc').locationpicker({
+			location: {latitude: 46.15242437752303, longitude: 2.7470703125},	
+			radius: 300,
+			inputBinding: {
+				locationNameInput: $('#loc')
+			}
+		});
+</script>
+</html>

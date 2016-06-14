@@ -13,9 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
 
 // Set up view engine to be html - render html
-app.set("views", __dirname + "/views");
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
+app.set('view engine', 'ejs'); // set up ejs for templating
+app.use(express.static(__dirname + '/views'));
 
 // Require the necessary express routes and use them
 app.use("/", require("./routes/index.js"));
