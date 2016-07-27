@@ -39,6 +39,13 @@ h2 {
 		text-align: center;
 }
 
+.search-item {
+	position: relative;
+	display: inline-block;
+	width: 80%;
+	padding: 0;
+}
+
 .search-div {
 	overflow: hidden;
 	padding-right: 0;
@@ -48,23 +55,21 @@ h2 {
 /* Search Bar */
 .search-wrapper input {
     width: 100%;
-    /*height: 20px;*/
-    padding: 10.5px 5px;
+    height: 40px;
+    padding: 10px 10px;
     font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
     border: solid;
 		border-width: thin;
     background: #fff;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px;
 		border-color: #212121;
 }
 
 /* Search button */
 .search-wrapper button {
     overflow: visible;
-    position: relative;
-    float: left;
+		height: 40px;
     border: 0;
-    padding: 0 10px;
     cursor: pointer;
     font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
     color: #fff;
@@ -72,6 +77,9 @@ h2 {
     background: #d83c3c;
     border-radius: 0 3px 3px 0;
     text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+		position: absolute;
+		right: 0;
+		top: 0;
 }
 
 .search-wrapper input:focus {
