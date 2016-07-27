@@ -1,9 +1,19 @@
 //Data
+var places = [
+	{
+		name: 'EventName',
+		desc: 'This is the description',
+		lat: 40.84886,
+		long: 40.84886,
+		category: 'event'
+	}
+];
+
 var cities = [{
 	city : '8200 Warden Avenue',
 	desc : 'IBM Canada Software Lab - Toronto, 8200 Warden Avenue, Markham, ON L6G 1C7',
 	lat : 43.84886,
-	long : -79.33838
+	long : 43.84886
 }, {
 	city : '3600 Steeles Avenue East',
 	desc : 'IBM Canada Ltd., 3600 Steeles Avenue East, Markham, ON L3R 9Z7',

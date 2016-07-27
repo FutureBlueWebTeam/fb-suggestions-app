@@ -39,7 +39,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		// Placeholder until the checkbox is implemented
+		var categories = [
+			'event',
+			'food'
+		];
+
 		window.onload = function() {
+
+
 			// When search button pressed call search
 			document.getElementById("search-button").onclick = submitSearch;
 
@@ -48,13 +56,33 @@
 		}
 
 		function submitSearch() {
-			console.log("submitSearch");
+			console.log("submitSearch: " + getSearchValue());
+			var matches = [];
+			// This isn't working must change this to a normal for loop or figure out for each properly
+			for (place in places) {
+				if (categories.indexOf(place.category) >= 0 &&
+					(places.name.indexOf(getSearchValue))) {
+					console.log(place);
+				}
+			}
 		}
 
 		function onChangeSearch() {
+			var ENTER = 13;
+			if (event.keyCode == ENTER) {
+				submitSearch();
+				return;
+			}
 			console.log("onChangeSearch");
 		}
 
+		/**
+		 * Get the value in the search bar
+		 * @return {String} value in search bar
+		 */
+		function getSearchValue() {
+			return document.getElementById("search-bar").value;
+		}
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
