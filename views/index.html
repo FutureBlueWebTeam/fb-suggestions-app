@@ -23,9 +23,9 @@
 			<div class="search-content cf row">
 				<div class="search-wrapper">
 					<div class="search-field">
-						<input type="text" placeholder="Search for an event" required>
+						<input type="text" id="search-bar" placeholder="Search for an event" required>
 					</div>
-					<button type="button">Search</button>
+					<button type="button" id="search-button">Search</button>
 				</div>
 			</div>
 
@@ -38,6 +38,24 @@
 				</div> -->
 		</div>
 	</div>
+	<script type="text/javascript">
+		window.onload = function() {
+			// When search button pressed call search
+			document.getElementById("search-button").onclick = submitSearch;
+
+			// When search input submitted call search
+			document.getElementById("search-bar").onkeyup = onChangeSearch;
+		}
+
+		function submitSearch() {
+			console.log("submitSearch");
+		}
+
+		function onChangeSearch() {
+			console.log("onChangeSearch");
+		}
+
+	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </body>
 
