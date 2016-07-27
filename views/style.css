@@ -20,16 +20,130 @@ h2 {
 	margin-top: 0;
 }
 
-.right-inner-addon {
+.cf:before, .cf:after {
+	content: "";
+	display: table;
+}
+
+.cf:after {
+	clear: both;
+}
+
+.cf {
+	zoom: 1;
+}
+
+.search-wrapper {
+    padding: 15px;
+		width: 100%;
+}
+
+.search-div {
+	overflow: hidden;
+	padding-right: .5em;
+	float: left;
+}
+
+/* Search Bar */
+.search-wrapper input {
+    width: 100%;
+    /*height: 20px;*/
+    padding: 10px 5px;
+    /*float: left;*/
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: solid;
+		border-width: thin;
+    background: #fff;
+    border-radius: 3px 0 0 3px;
+		border-color: #212121;
+}
+
+/* Search button */
+.search-wrapper button {
+    overflow: visible;
+    position: relative;
+    float: right;
+    border: 0;
+    padding: 1px 10px;
+    cursor: pointer;
+    font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: #fff;
+    text-transform: uppercase;
+    background: #d83c3c;
+    border-radius: 0 3px 3px 0;
+    text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+}
+
+.search-wrapper input:focus {
+    outline: 0;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+}
+
+.search-wrapper input::-webkit-input-placeholder {
+   color: #999;
+   font-weight: normal;
+   font-style: italic;
+}
+
+.search-wrapper input:-moz-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.search-wrapper input:-ms-input-placeholder {
+    color: #999;
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+
+.search-wrapper button:hover{
+    background: #e54040;
+}
+
+.search-wrapper button:active,
+.search-wrapper button:focus{
+    background: #c42f2f;
+	outline: 0;
+}
+
+.search-wrapper button:before { /* left arrow */
+    content: '';
+    position: absolute;
+    border-width: 8px 8px 8px 0;
+    border-style: solid solid solid none;
+    border-color: transparent #d83c3c transparent;
+    top: 12px;
+    left: -6px;
+}
+
+.search-wrapper button:hover:before{
+    border-right-color: #e54040;
+}
+
+.search-wrapper button:focus:before,
+.search-wrapper button:active:before{
+        border-right-color: #c42f2f;
+}
+
+.search-wrapper button::-moz-focus-inner { /* remove extra button spacing for Mozilla Firefox */
+    border: 0;
+    padding: 0;
+}
+
+/*.right-inner-addon {
     position: relative;
     width: 100% !important;
 }
 .right-inner-addon input {
-    padding-right: 30px;    
+    padding-right: 30px;
 }
 .right-inner-addon i {
     position: absolute;
     right: 0px;
     padding: 10px 12px;
     pointer-events: none;
-}
+}*/
