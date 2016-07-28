@@ -1,8 +1,18 @@
-html, body {}
-.container {
-    width: 100% !important;
-    padding: 0;
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
+
+#map {
+    height: inherit !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 .infoWindowContent {
     font-size: 14px !important;
     border-top: 1px solid #ccc;
@@ -30,16 +40,16 @@ h2 {
     width: 100%;
     text-align: center;
 }
-.search-wrapper {
+/*.search-wrapper {
     position: relative;
     display: inline-block;
     width: 80%;
     padding: 0;
-}
-.search-field {
+}*/
+/*.search-field {
     overflow: hidden;
     padding-right: 0;
-}
+}*/
 
 .search-content input {
     width: 100%;
@@ -96,8 +106,8 @@ h2 {
     background: #c42f2f;
     outline: 0;
 }
-.search-wrapper button:before {
-    /* left arrow */
+/*.search-wrapper button:before {
+    /* left arrow *//*
     content: '';
     position: absolute;
     border-width: 8px 8px 8px 0;
@@ -105,14 +115,62 @@ h2 {
     border-color: transparent #d83c3c transparent;
     top: 12px;
     left: -6px;
-}
-.search-wrapper button:hover:before {
+}*/
+/*.search-wrapper button:hover:before {
     border-right-color: #e54040;
-}
-.search-wrapper button:focus:before, .search-wrapper button:active:before {
+}*/
+/*.search-wrapper button:focus:before, .search-wrapper button:active:before {
     border-right-color: #c42f2f;
-}
-.search-content button::-moz-focus-inner {
+}*/
+/*.search-content button::-moz-focus-inner {
     border: 0;
     padding: 0;
+}*/
+
+
+#search-wrapper {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 350px;
+    height: 35px;
+    z-index: 2;
+}
+
+#search-button,
+#search-bar {
+    border-radius: 0;
+}
+
+#search-bar {
+    position: absolute;
+    left: 30px;
+    top: 0;
+    height: 100%;
+}
+
+#search-button {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    height: 100%;
+}
+
+#hamburger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 30px;
+}
+
+#menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 400px;
+    z-index: 1;
+    background: black;
+    background: rgba(0, 0, 0, 0.6);
 }
