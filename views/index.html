@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		// Placeholder until the checkbox is implemented
+		// Placeholder until the checkbox is implemented to retrieve what categories are being searched for
 		var categories = [
 			'event',
 			'food'
@@ -55,25 +55,33 @@
 			document.getElementById("search-bar").onkeyup = onChangeSearch;
 		}
 
+		/**
+		 * Search the data in app.js for names matching the search term falling in the appropriate categories specified by the checkbox under the search bar
+		 * @return {void} void
+		 */
 		function submitSearch() {
 			console.log("submitSearch: " + getSearchValue());
 			var matches = [];
 			// This isn't working must change this to a normal for loop or figure out for each properly
-			for (place in places) {
-				if (categories.indexOf(place.category) >= 0 &&
-					(places.name.indexOf(getSearchValue))) {
-					console.log(place);
+			for (var i = 0; i < places.length; i++) {
+				if (categories.indexOf(places[i].category) >= 0 &&
+					(places[i].name.toLowerCase().indexOf(getSearchValue().toLowerCase()) != -1)) {
+					console.log("Found the entry:\nName:" + places[i].name + "\nCategory:" + places[i].category);
 				}
 			}
 		}
 
+		/**
+		 * When enter is pressed submit the input, leaves room to also perform searches during a users typing to provide content assist in the future
+		 * @return {void} void
+		 */
 		function onChangeSearch() {
 			var ENTER = 13;
 			if (event.keyCode == ENTER) {
 				submitSearch();
 				return;
 			}
-			console.log("onChangeSearch");
+			//console.log("onChangeSearch");
 		}
 
 		/**
@@ -84,7 +92,7 @@
 			return document.getElementById("search-bar").value;
 		}
 	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 </body>
 
 </html>
