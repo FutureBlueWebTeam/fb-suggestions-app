@@ -27,12 +27,18 @@ var cities = [{
 }];
 
 //Angular App Module and Controller
-angular.module('fb-suggestions-app', []).controller('MapCtrl', function($scope) {
+angular.module('fb-suggestions-app', ["pageslide-directive"]).controller('appCtrl', function($scope) {
 
 	var mapOptions = {
 		zoom : 12,
 		center : new google.maps.LatLng(43.84886, -79.33838),
-		mapTypeId : google.maps.MapTypeId.TERRAIN
+		mapTypeId : google.maps.MapTypeId.ROADMAP,
+		disableDefaultUI : true,
+		scaleControl : true,
+		zoomControl : true,
+		zoomControlOptions : {
+			style : google.maps.ZoomControlStyle.LARGE
+		}
 	}
 
 	$scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -48,7 +54,7 @@ angular.module('fb-suggestions-app', []).controller('MapCtrl', function($scope) 
 			position : new google.maps.LatLng(info.lat, info.long),
 			title : info.city
 		});
-		marker.content = '<div class="infoWindowContent">' + info.desc + '<img class="image-reponsive center center-block" src="http://33xlkmrogb473k7z1dknkdmx.wpengine.netdna-cdn.com/wp-content/uploads/2016/05/sushi7.jpg"/>' + '</div>';
+		marker.content = '<div class="infoWindowContent">' + info.desc + '<img class="image-reponsive " src="http://33xlkmrogb473k7z1dknkdmx.wpengine.netdna-cdn.com/wp-content/uploads/2016/05/sushi7.jpg"/>' + '</div>';
 
 		google.maps.event.addListener(marker, 'click', function() {
 			infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
@@ -66,11 +72,33 @@ angular.module('fb-suggestions-app', []).controller('MapCtrl', function($scope) 
 		return window.innerHeight;
 	};
 	$scope.winWidth = function() {
-		return window.innerWidth ;
+		return window.innerWidth;
 	};
 
 	$scope.openInfoWindow = function(e, selectedMarker) {
 		e.preventDefault();
 		google.maps.event.trigger(selectedMarker, 'click');
 	}
+	
+	// $scope.slideSize = $scope.winWidth()/2;
+
+	$scope.checked = false;
+	$scope.size = '100px';
+	$scope.toggle = function() {
+		$scope.checked = !$scope.checked
+	}
+	$scope.mockRouteChange = function() {
+		$scope.$broadcast('$locationChangeStart');
+	}
+	$scope.onopen = function() {
+		alert('Open');
+	}
+	$scope.onclose = function() {
+		alert('Close');
+	}
 });
+
+angular.element(document).ready(function() {
+	c = angular.element(document.querySelector('#controller-demo')).scope();
+});
+ 

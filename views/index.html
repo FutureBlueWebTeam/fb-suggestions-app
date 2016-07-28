@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="fb-suggestions-app" ng-controller="MapCtrl" >
+<html lang="en" ng-app="fb-suggestions-app" ng-controller="appCtrl" >
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,32 +9,25 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
 
-		<link rel="stylesheet" href="style.css">
-		<script src="../public/js/app.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js"></script>
+		<link rel="stylesheet" href="../css/style.css">
+		<script src="../js/app.js"></script>
+		<script src="../js/angular-pageslide-directive.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=&sensor=false&extension=.js?key=AIzaSyB8iq49dtjLSQNiqwJBryTRmy_xmBlrROs&callback=initMap"></script>
 	</head>
 	<body>
-		<div >
-			<div >
-				<h1 class="center text-center" style="color: #1E90FF;"> Future Blue Suggestion App</h1>
-				<div class="right-inner-addon ">
-					<i class="search-icon glyphicon glyphicon-search"></i>
-					<input type="search"
-					class="form-control"
-					placeholder="Search"  />
-				</div>
-				
+		<div pageslide ps-open="checked" ps-side="left" ps-push="true" ps-click-outside="false">
+			<div style="padding:20px" id="right-slide">
+				<div ng-include="'signin.html'"></div>
+				<!-- <a ng-click="toggle()" class="button" href="">Close</a> -->
 			</div>
+		</div>
+		<div >
 			<div class="center-block">
-				<div id="map" class="center-block center" ng-style="{'width': winWidth(), 'height': winHeight()-100}"></div>
-				<!-- <div id="class" ng-repeat="marker in markers | orderBy : 'title'" class="text-center">
-				<a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
-				<br />
-				</div> -->
+				<div id="map" class="center-block center" ng-style="{'width': winWidth(), 'height': winHeight()}"></div>
 			</div>
 		</div>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	</body>
+	<a class="tiny btn btn-info btn-small" href="" id="menu" ng-click="toggle()">Menu</a>
 </html>
-
 

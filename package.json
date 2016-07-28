@@ -7,5 +7,21 @@
     "express": "^4.13.4",
     "http": "0.0.0",
     "sqlite3": "^3.1.4"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agencare89/fb-suggestions-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agencare89/fb-suggestions-app/issues"
+  },
+  "homepage": "https://github.com/agencare89/fb-suggestions-app#readme",
+  "description": ""
 }
