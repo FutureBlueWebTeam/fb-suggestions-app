@@ -177,7 +177,6 @@ window.onload = function () {
             submitSearch();
             return;
         }
-        //console.log("onChangeSearch");
     }
 
     /**
