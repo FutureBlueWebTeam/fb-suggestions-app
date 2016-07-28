@@ -1,9 +1,7 @@
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
 }
-
 #map {
     height: inherit !important;
     position: absolute;
@@ -12,7 +10,6 @@ body {
     right: 0;
     bottom: 0;
 }
-
 .infoWindowContent {
     font-size: 14px !important;
     border-top: 1px solid #ccc;
@@ -32,21 +29,11 @@ h2 {
 .cf {
     zoom: 1;
 }
-
-/* Search Bar */
-
 .search-content {
     padding: 15px;
     width: 100%;
     text-align: center;
 }
-/*.search-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 80%;
-    padding: 0;
-}*/
-
 .search-content input {
     width: 100%;
     height: 40px;
@@ -58,9 +45,6 @@ h2 {
     border-radius: 3px;
     border-color: #212121;
 }
-
-/* Search button */
-
 .search-content button {
     overflow: visible;
     height: 40px;
@@ -72,8 +56,6 @@ h2 {
     right: 0;
     top: 0;
 }
-
-
 .search-content button:hover {
     background: #e54040;
 }
@@ -81,28 +63,6 @@ h2 {
     background: #c42f2f;
     outline: 0;
 }
-/*.search-wrapper button:before {
-    /* left arrow *//*
-    content: '';
-    position: absolute;
-    border-width: 8px 8px 8px 0;
-    border-style: solid solid solid none;
-    border-color: transparent #d83c3c transparent;
-    top: 12px;
-    left: -6px;
-}*/
-/*.search-wrapper button:hover:before {
-    border-right-color: #e54040;
-}*/
-/*.search-wrapper button:focus:before, .search-wrapper button:active:before {
-    border-right-color: #c42f2f;
-}*/
-/*.search-content button::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}*/
-
-
 #search-wrapper {
     position: absolute;
     left: 10px;
@@ -111,12 +71,9 @@ h2 {
     height: 40px;
     z-index: 2;
 }
-
-#search-button,
-#search-bar {
+#search-button, #search-bar {
     border-radius: 0;
 }
-
 #search-bar {
     position: absolute;
     left: 30px;
@@ -124,13 +81,11 @@ h2 {
     height: 100%;
     border-radius: 0 3px 3px 0;
 }
-
 #search-bar:focus {
     outline: 0;
     background: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
 }
-
 #search-button {
     position: absolute;
     right: -30px;
@@ -143,16 +98,13 @@ h2 {
     border-color: #d83c3c;
     border-style: none;
 }
-
 #search-button:hover {
-  background: #e54040;
+    background: #e54040;
 }
-
 #search-button:active, #search-button:focus {
     background: #c42f2f;
     outline: 0;
 }
-
 #search-button:before {
     /* left arrow */
     content: '';
@@ -163,7 +115,6 @@ h2 {
     top: 12px;
     left: -6px;
 }
-
 #search-button:hover:before {
     border-right-color: #e54040;
 }
@@ -174,7 +125,6 @@ h2 {
     border: 0;
     padding: 0;
 }
-
 #search-bar::-webkit-input-placeholder {
     color: #999;
     font-weight: normal;
@@ -190,7 +140,6 @@ h2 {
     font-weight: normal;
     font-style: italic;
 }
-
 #hamburger {
     position: absolute;
     left: 0;
@@ -203,7 +152,6 @@ h2 {
     border-color: #d83c3c;
     border-style: none;
 }
-
 #menu {
     position: absolute;
     left: 0;
