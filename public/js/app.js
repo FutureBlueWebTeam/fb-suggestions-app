@@ -257,7 +257,6 @@ window.onload = function () {
      * Reloads the places with the query and selected category filters
      */
     function submitSearch() {
-        console.log("submitSearch: " + getSearchValue());
         var matches = [];
         // This isn't working must change this to a normal for loop or figure out for each properly
         var searchQuery = document.getElementById("search-bar").value;
