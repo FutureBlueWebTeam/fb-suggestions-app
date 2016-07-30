@@ -122,13 +122,12 @@ window.onload = function () {
                         this.imageURL = placeDetails.photos[0].getUrl({
                             maxWidth: 500
                         });
-                        console.log(this.imageURL);
                     }
                     this.marker.setMap(null); //Destroy existing marker
                     this.createMarker();
                     this.isLoaded = true;
                 } else {
-                    console.log(status)
+                    console.warn(status)
                 }
             });
         }
@@ -154,7 +153,7 @@ window.onload = function () {
             }
             var imgHTML;
             if (this.imageURL) {
-                imgHTML = '<img src="' + this.imageURL + '" alt="Porcelain Factory of Vista Alegre">'
+                imgHTML = '<div class="img-wrapper"><img src="' + this.imageURL + '" alt="Porcelain Factory of Vista Alegre"></div>'
             } else {
                 imgHTML = "";
             }

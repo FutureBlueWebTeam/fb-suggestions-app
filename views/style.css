@@ -43,8 +43,14 @@ body {
     font-size: 15px;
 }
 
+.infoWindowContent .img-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
 .infoWindowContent img {
-    max-width: 100%;
+    max-width: 250px;
+    display: inline-block;
 }
 
 h2 {
