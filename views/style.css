@@ -15,10 +15,32 @@ body {
 
 .infoWindowContent {
     font-size: 14px !important;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
-    max-height: 500px;
+    padding: 20px;
+    max-width: 400px;
+    max-height: 600px;
+    overflow-x: hidden;
+    margin-left: 10px;
+    padding-bottom: 30px;
+}
+
+.infoWindowContent .iw-title {}
+
+.infoWindowContent .iw-rating {
+    font-size: 18px;
+    color: gold;
+    margin-top: 5px;
+}
+
+.infoWindowContent .iw-desc {
+    word-wrap: break-word;
     overflow: hidden;
+    max-height: 5em;
+    line-height: 1em;
+    margin-top: 10px;
+}
+
+.infoWindowContent .iw-phone {
+    font-size: 15px;
 }
 
 .infoWindowContent img {
@@ -216,14 +238,30 @@ h2 {
     animation: menu-slide-out 1s ease forwards;
 }
 
+@-webkit-keyframes menu-slide-in {
+    100% {
+        -webkit-transform: translate(500px, 0);
+        transform: translate(500px, 0);
+    }
+}
+
 @keyframes menu-slide-in {
     100% {
+        -webkit-transform: translate(500px, 0);
         transform: translate(500px, 0);
+    }
+}
+
+@-webkit-keyframes menu-slide-out {
+    100% {
+        -webkit-transform: translate(-500px, 0);
+        transform: translate(-500px, 0);
     }
 }
 
 @keyframes menu-slide-out {
     100% {
+        -webkit-transform: translate(-500px, 0);
         transform: translate(-500px, 0);
     }
 }
