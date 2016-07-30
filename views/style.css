@@ -1,7 +1,9 @@
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
 }
+
 #map {
     height: inherit !important;
     position: absolute;
@@ -10,30 +12,44 @@ html, body {
     right: 0;
     bottom: 0;
 }
+
 .infoWindowContent {
     font-size: 14px !important;
     border-top: 1px solid #ccc;
     padding-top: 10px;
+    max-height: 500px;
+    overflow: hidden;
 }
+
+.infoWindowContent img {
+    max-width: 100%;
+}
+
 h2 {
     margin-bottom: 0;
     margin-top: 0;
 }
-.cf:before, .cf:after {
+
+.cf:before,
+.cf:after {
     content: "";
     display: table;
 }
+
 .cf:after {
     clear: both;
 }
+
 .cf {
     zoom: 1;
 }
+
 .search-content {
     padding: 15px;
     width: 100%;
     text-align: center;
 }
+
 .search-content input {
     width: 100%;
     height: 40px;
@@ -45,6 +61,7 @@ h2 {
     border-radius: 3px;
     border-color: #212121;
 }
+
 .search-content button {
     overflow: visible;
     height: 40px;
@@ -56,13 +73,17 @@ h2 {
     right: 0;
     top: 0;
 }
+
 .search-content button:hover {
     background: #e54040;
 }
-.search-content button:active, .search-content button:focus {
+
+.search-content button:active,
+.search-content button:focus {
     background: #c42f2f;
     outline: 0;
 }
+
 #search-wrapper {
     position: absolute;
     left: 10px;
@@ -70,95 +91,139 @@ h2 {
     width: 350px;
     height: 40px;
     z-index: 2;
+    max-width: 90%;
 }
-#search-button, #search-bar {
+
+#search-button,
+#search-bar {
     border-radius: 0;
 }
+
 #search-bar {
     position: absolute;
-    left: 30px;
+    left: 40px;
     top: 0;
     height: 100%;
-    border-radius: 0 3px 3px 0;
 }
+
 #search-bar:focus {
     outline: 0;
     background: #fff;
     box-shadow: 0 0 2px rgba(0, 0, 0, .8) inset;
 }
+
 #search-button {
     position: absolute;
-    right: -30px;
+    right: -40px;
     top: 0;
     height: 100%;
     width: 40px;
     color: #fff;
-    background: #d83c3c;
-    border-radius: 0 3px 3px 0;
-    border-color: #d83c3c;
+    background: #C92A2A;
+    border-color: #C92A2A;
     border-style: none;
 }
+
 #search-button:hover {
-    background: #e54040;
+    background: #e23333;
 }
-#search-button:active, #search-button:focus {
-    background: #c42f2f;
+
+#search-button:active,
+#search-button:focus {
+    background: #C92A2A;
     outline: 0;
 }
+
 #search-button:before {
     /* left arrow */
     content: '';
     position: absolute;
     border-width: 8px 8px 8px 0;
     border-style: solid solid solid none;
-    border-color: transparent #d83c3c transparent;
+    border-color: transparent #C92A2A transparent;
     top: 12px;
     left: -6px;
 }
+
 #search-button:hover:before {
-    border-right-color: #e54040;
+    border-right-color: #e23333;
 }
-#search-button:focus:before, #search-button:active:before {
-    border-right-color: #c42f2f;
+
+#search-button:focus:before,
+#search-button:active:before {
+    border-right-color: #C92A2A;
 }
+
 #search-button::-moz-focus-inner {
     border: 0;
     padding: 0;
 }
+
 #search-bar::-webkit-input-placeholder {
     color: #999;
     font-weight: normal;
     font-style: italic;
 }
+
 #search-bar:-moz-placeholder {
     color: #999;
     font-weight: normal;
     font-style: italic;
 }
+
 #search-bar:-ms-input-placeholder {
     color: #999;
     font-weight: normal;
     font-style: italic;
 }
+
 #hamburger {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
-    width: 30px;
+    width: 40px;
     color: #fff;
-    background: #d83c3c;
-    border-radius: 3px 0 0 3px;
-    border-color: #d83c3c;
+    background: #C92A2A;
+    border-color: #C92A2A;
     border-style: none;
 }
+
+#hamburger:hover {
+    background: #e23333;
+}
+
 #menu {
     position: absolute;
-    left: 0;
     top: 0;
+    left: -500px;
     height: 100%;
-    width: 400px;
+    width: 415px;
     z-index: 1;
     background: black;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.slide-menu-right {
+    -webkit-animation: menu-slide-in 1s ease forwards;
+    animation: menu-slide-in 1s ease forwards;
+}
+
+.slide-menu-left {
+    position: absolute;
+    left: 0 !important;
+    -webkit-animation: menu-slide-out 1s ease forwards;
+    animation: menu-slide-out 1s ease forwards;
+}
+
+@keyframes menu-slide-in {
+    100% {
+        transform: translate(500px, 0);
+    }
+}
+
+@keyframes menu-slide-out {
+    100% {
+        transform: translate(-500px, 0);
+    }
 }
