@@ -157,13 +157,7 @@ window.onload = function () {
             } else {
                 imgHTML = "";
             }
-            this.marker.content = `<div class="infoWindowContent">
-                                        <h2 class="iw-title">` + this.name + `</h2>
-                                        <p class="iw-rating">` + intToStars(this.rating) + `</p>
-                                        ` + imgHTML + `
-                                        <p class="iw-desc">` + this.desc + `</p>
-                                        <p class="iw-phone">` + this.phone + `</p>
-                                    </div>`
+            this.marker.content = '<div class="infoWindowContent"><h2 class="iw-title">` + this.name + `</h2><p class="iw-rating">' + intToStars(this.rating) + '</p>' + imgHTML + '<p class="iw-desc">' + this.desc + '</p><p class="iw-phone">' + this.phone + '</p></div>';
             markers.push(this.marker);
 
             google.maps.event.addListener(this.marker, 'mouseover', () => {
