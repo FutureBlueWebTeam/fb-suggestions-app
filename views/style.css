@@ -1,3 +1,4 @@
+
 html,
 body {
     width: 100%;
@@ -271,3 +272,42 @@ h2 {
         transform: translate(-500px, 0);
     }
 }
+
+/* Login */
+
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    top: 150px;
+}
+
+#login-label {
+    display: block;
+    color: #fff;
+    font: bold 30px 'lucida sans', 'trebuchet MS', 'Tahoma';
+
+}
+
+.login-line {
+    
+}
+
+.login-wrapper input {
+    display: block;
+    width: 75%;
+    margin: 10px 0 10px 20px;
+    height: 40px;
+    padding: 10px 10px;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    background: #fff;
+    border: thin solid #212121;
+}
+
+#login-submit {
+    display: block;
+    height: 40px;
+    padding: 0 7%;
+    margin-left: 50%;
+
+}
+
