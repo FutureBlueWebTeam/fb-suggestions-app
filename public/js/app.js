@@ -48,7 +48,8 @@ window.onload = function () {
                 }
                 , {
                     saturation: -2
-                }
+                },
+                {
                     lightness: -80
                 }
                 , ]
