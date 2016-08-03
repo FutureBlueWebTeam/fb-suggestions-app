@@ -1,3 +1,4 @@
+
 html,
 body {
     width: 100%;
@@ -270,4 +271,67 @@ h2 {
         -webkit-transform: translate(-500px, 0);
         transform: translate(-500px, 0);
     }
+}
+
+/* Login */
+
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    top: 150px;
+}
+
+#label-wrapper {
+    margin-left: 20px;
+}
+
+#login-label {
+    display: inline-block;
+    color: #fff;
+    font: bold 30px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    text-align: center;
+    padding: 0 5px;
+}
+
+.login-line {
+    display: inline-block;
+    background: #fff no-repeat scroll center;
+    width: 30%;
+    height: 1px;
+    margin-bottom: 8px;
+    box-shadow: box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.login-wrapper input {
+    display: block;
+    width: 80%;
+    margin: 10px 0 10px 20px;
+    height: 40px;
+    padding: 10px 10px;
+    font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    background: #fff;
+    border: thin solid #212121;
+}
+
+#login-submit {
+    display: block;
+    height: 40px;
+    padding: 0 7%;
+    margin-left: 61%;
+    overflow: visible;
+    color: #fff;
+    background: #d83c3c;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+    border-color: #212121;
+    border-radius: 0 3px 3px 0;
+}
+
+#login-submit:hover {
+    background: #e54040;
+}
+
+#login-submit:active,
+#login-submit:focus {
+    background: #c42f2f;
+    outline: 0;
 }
