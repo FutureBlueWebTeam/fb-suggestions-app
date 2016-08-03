@@ -10,40 +10,43 @@ var GOOGLE_API_KEY = "AIzaSyBhy9XlaP1zIdzVMPbJanvr9wLqFxT3r-U";
 
 window.onload = function () {
     var mapOptions = {
-        zoom: 12,
-        center: new google.maps.LatLng(43.84886, -79.33838),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControl: false,
-        styles: [{
+        zoom: 12
+        , center: new google.maps.LatLng(43.84886, -79.33838)
+        , mapTypeId: google.maps.MapTypeId.ROADMAP
+        , mapTypeControl: false
+        , styles: [{
             stylers: [{
                 visibility: 'simplified'
             }]
     }, {
-            elementType: 'labels',
-            stylers: [{
+            elementType: 'labels'
+            , stylers: [{
                 visibility: 'off'
             }]
     }, {
-            featureType: 'road',
-            elementType: 'all',
-            stylers: [
+            featureType: 'road'
+            , elementType: 'all'
+            , stylers: [
                 {
                     color: '#4178BE'
                 }
               ]
             }, {
-            featureType: 'all',
-            elementType: 'all',
-            stylers: [
+            featureType: 'all'
+            , elementType: 'all'
+            , stylers: [
                 {
                     hue: '#162F39'
                 }
+                
                 , {
                     saturation: -2
                 }
+                
                 , {
                     lightness: -80
                 }
+                
                 , ]
             }]
     }
@@ -54,14 +57,14 @@ window.onload = function () {
     //Request user's location on load
     getUserLocation(function (lat, lng) {
         map.panTo({
-            lat: lat,
-            lng: lng
+            lat: lat
+            , lng: lng
         });
         this.marker = new google.maps.Marker({
-            map: map,
-            position: new google.maps.LatLng(lat, lng),
-            title: "You are here!",
-            icon: "img/guy.png"
+            map: map
+            , position: new google.maps.LatLng(lat, lng)
+            , title: "You are here!"
+            , icon: "img/guy.png"
         });
     });
 
@@ -138,10 +141,10 @@ window.onload = function () {
         this.createMarker = function () {
             if (this.isLoaded || this.isDestroyed) return;
             this.marker = new google.maps.Marker({
-                map: map,
-                position: new google.maps.LatLng(this.lat, this.lng),
-                title: this.name,
-                icon: "img/pin.png"
+                map: map
+                , position: new google.maps.LatLng(this.lat, this.lng)
+                , title: this.name
+                , icon: "img/pin.png"
             });
 
             function intToStars(x) {
@@ -186,10 +189,10 @@ window.onload = function () {
     */
     placeService.easyRadarSearch = function (keyword, callback) {
         var request = {
-            bounds: map.getBounds(),
-            keyword: keyword,
-            openNow: false,
-            type: active_categories
+            bounds: map.getBounds()
+            , keyword: keyword
+            , openNow: false
+            , type: active_categories
         };
 
         //Processes the returned results for just the information we need
@@ -201,10 +204,10 @@ window.onload = function () {
                     var place = results[i];
                     //Create the object
                     var newPlace = new PlaceObject({
-                        lat: place.geometry.location.lat(),
-                        lng: place.geometry.location.lng(),
-                        placeId: place.place_id,
-                        isGooglePlace: true
+                        lat: place.geometry.location.lat()
+                        , lng: place.geometry.location.lng()
+                        , placeId: place.place_id
+                        , isGooglePlace: true
                     });
                     newPlace.createMarker();
                     newResults.push(newPlace);
@@ -293,8 +296,8 @@ window.onload = function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) { //Ask for user's location
                     callback(position.coords.latitude, position.coords.longitude);
-                },
-                function (error) { //If permission is denied...
+                }
+                , function (error) { //If permission is denied...
                     callback(43.848855, -79.338380);
                 }
             );
@@ -304,16 +307,21 @@ window.onload = function () {
     }
 
     //Slider code
-    var menuHidden = true;
-    if (menuHidden) {
-        document.getElementById("hamburger").onclick = function () {
-            menuHidden = !menuHidden;
-            if (menuHidden) {
-                document.getElementById("menu").className = "slide-menu-left";
-            } else {
-                document.getElementById("menu").className = "slide-menu-right";
-            }
+    var menuHidden = false;
+
+    function animateSliderMenu() {
+        if (menuHidden) {
+            document.getElementById("menu").className = "slide-menu-left";
+            document.querySelector("#hamburger > span").className = "glyphicon glyphicon-menu-hamburger";
+        } else {
+            document.getElementById("menu").className = "slide-menu-right";
+            document.querySelector("#hamburger > span").className = "glyphicon glyphicon-menu-left";
         }
     }
+    document.getElementById("hamburger").onclick = function () {
+        menuHidden = !menuHidden;
+        animateSliderMenu();
+    }
+    animateSliderMenu();
 
 }
