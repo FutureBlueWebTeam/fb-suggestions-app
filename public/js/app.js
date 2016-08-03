@@ -105,7 +105,7 @@ window.onload = function () {
             }, (placeDetails, status) => { //Arrow function into callback
                 if (status === google.maps.places.PlacesServiceStatus.OK) { //Check status
                     this.name = placeDetails.name; //Update details
-                    if (placeDetails.reviews) {
+                    if (placeDetails.reviews.length > 0) {
                         //Use top review as description
                         this.desc = placeDetails.reviews.reduce(function (last, cur) {
                             if (last.rating < cur.rating) {
