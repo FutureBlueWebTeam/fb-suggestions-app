@@ -11,8 +11,8 @@
         if (window.location.protocol != "https:")
             window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js"></script>
@@ -28,17 +28,44 @@
                 <button id="hamburger"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button>
             </div>
             <div id="menu">
-                <div class="login-wrapper">
-                    <form id="login-form" class="cf">
-                        <div id="label-wrapper">
-                            <div class="login-line"></div>
-                            <label id="login-label" class="cf">Login</label>
-                            <div class="login-line"></div>
+                <div class="inner-menu">
+                    <div class="tabs-wrapper">
+                        <button onclick="" class="tab tab-selected" id="cat-tab">Categories</button>
+                        <button class="tab disabled" id="user-tab">My Events</button>
+                    </div>
+                    <div class="category-wrapper">
+                        <!--glyphicons are NOT a good way to do this. We need something else. -->
+                        <div class="category-item category-item-selected"><i class="glyphicon glyphicon-film"></i>
+                            <p style="left:36px;">Movies</p>
                         </div>
-                        <input id="login-input" class="cf" type="text" placeholder="Username" required>
-                        <input id="password-input" class="cf" type="password" placeholder="Password" required>
-                        <button type="submit" id="login-submit">Login</button>
-                    </form>
+                        <div class="category-item"><i style="top:16px;" class="glyphicon glyphicon-shopping-cart"></i>
+                            <p style="left:20px;">Shopping</p>
+                        </div>
+                        <div class="category-item"><i style="left:28px; top:12px;" class="glyphicon glyphicon-cutlery"></i>
+                            <p>&nbsp;&nbsp;Food</p>
+                        </div>
+                        <div class="category-item"><i class="glyphicon glyphicon-tree-conifer"></i>
+                            <p>&nbsp;&nbsp;Active</p>
+                        </div>
+                        <div class="category-item"><i style="top:15px" class="glyphicon glyphicon-glass"></i>
+                            <p>Nightlife</p>
+                        </div>
+                        <div class="category-item"><i style="top:15px" class="glyphicon glyphicon-asterisk"></i>
+                            <p style="font-size:23px; lefT:12px; top:125px;">Miscellaneous</p>
+                        </div>
+                    </div>
+                    <div class="login-wrapper" style="display:none;">
+                        <form id="login-form" class="cf">
+                            <div id="label-wrapper">
+                                <div class="login-line"></div>
+                                <label id="login-label" class="cf">Login</label>
+                                <div class="login-line"></div>
+                            </div>
+                            <input id="login-input" class="cf" type="text" placeholder="Username" required>
+                            <input id="password-input" class="cf" type="password" placeholder="Password" required>
+                            <button type="submit" id="login-submit">Login</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

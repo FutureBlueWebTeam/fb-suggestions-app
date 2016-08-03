@@ -2,15 +2,23 @@
 var places = [];
 
 //GMaps categories with all non-entertainment entries removed
-var categories = ["library", "meal_delivery", "meal_takeaway", "movie_rental", "movie_theater", "museum", "night_club", "park", "pet_store", "restaurant", "shoe_store", "shopping_mall", "spa", "stadium", "store", "university", "amusement_park", "aquarium", "art_gallery", "bakery", "bar", "beauty_salon", "book_store", "bowling_alley", "cafe", "campground", "casino", "city_hall", "clothing_store", "convenience_store", "department_store", "electronics_store", "gym"];
-var active_categories = ["movie_theater"];
+var sub_categories = ["meal_delivery", "meal_takeaway", "movie_rental", "movie_theater", "museum", "night_club", "park", "pet_store", "restaurant", "shoe_store", "shopping_mall", "spa", "stadium", "store", "university", "amusement_park", "aquarium", "art_gallery", "bakery", "bar", "beauty_salon", "book_store", "bowling_alley", "cafe", "campground", "casino", "clothing_store", "convenience_store", "department_store", "electronics_store", "gym"];
+var categories = [
+    ["movie_rental", "movie_theater"] 
+    , ["pet_store", "shoe_store", "shopping_mall", "store", "book_store", "clothing_store", "convenience_store", "department_store", "electronics_store"]  
+    , ["meal_delivery", "meal_takeaway", "restaurant", "cafe", "convenience_store"]
+    , ["park", "bowling_alley", "campground", "gym"]
+    , ["bar", "night_club", "casino"]
+];
+var active_categories = categories[0];
+console.log(active_categories);
 
 var GOOGLE_API_KEY = "AIzaSyBhy9XlaP1zIdzVMPbJanvr9wLqFxT3r-U";
 
 
 window.onload = function () {
     var mapOptions = {
-        zoom: 12
+        zoom: 16
         , center: new google.maps.LatLng(43.84886, -79.33838)
         , mapTypeId: google.maps.MapTypeId.ROADMAP
         , mapTypeControl: false
@@ -38,15 +46,11 @@ window.onload = function () {
                 {
                     hue: '#162F39'
                 }
-                
                 , {
                     saturation: -2
                 }
-                
-                , {
                     lightness: -80
                 }
-                
                 , ]
             }]
     }
@@ -105,7 +109,7 @@ window.onload = function () {
             }, (placeDetails, status) => { //Arrow function into callback
                 if (status === google.maps.places.PlacesServiceStatus.OK) { //Check status
                     this.name = placeDetails.name; //Update details
-                    if (placeDetails.reviews.length > 0) {
+                    if (placeDetails.reviews && placeDetails.reviews.length > 0) {
                         //Use top review as description
                         this.desc = placeDetails.reviews.reduce(function (last, cur) {
                             if (last.rating < cur.rating) {
@@ -192,7 +196,7 @@ window.onload = function () {
             bounds: map.getBounds()
             , keyword: keyword
             , openNow: false
-            , type: active_categories
+            , types: active_categories
         };
 
         //Processes the returned results for just the information we need
@@ -227,6 +231,17 @@ window.onload = function () {
     var searchQuery = null;
 
     /*
+     * Forces all markers to clear.
+     */
+    function clearMarkers() {
+        markers = [];
+        for (var i = 0; i < places.length; i++) {
+            places[i].destroy();
+        }
+        places = [];
+    }
+
+    /*
      * Loads new markers.
      */
     function loadNewPlaces(query) {
@@ -254,9 +269,8 @@ window.onload = function () {
      * Reloads the places with the query and selected category filters
      */
     function submitSearch() {
-        var matches = [];
-        // This isn't working must change this to a normal for loop or figure out for each properly
         var searchQuery = document.getElementById("search-bar").value;
+        clearMarkers();
         loadNewPlaces(searchQuery, true, loadNewPlaces);
     }
     document.getElementById("search-button").onclick = submitSearch;
@@ -323,5 +337,54 @@ window.onload = function () {
         animateSliderMenu();
     }
     animateSliderMenu();
+
+
+    //Tabs code
+    var menuTab = 0;
+
+    function updateTab() {
+        switch (menuTab) {
+        case 0:
+            document.querySelector(".category-wrapper").style.display = "inherit";
+            document.querySelector(".login-wrapper").style.display = "none";
+            break;
+        case 1:
+            document.querySelector(".category-wrapper").style.display = "none";
+            document.querySelector(".login-wrapper").style.display = "inherit";
+            break;
+        }
+    }
+
+    document.getElementById("cat-tab").onclick = function (e) {
+        document.querySelector(".tab-selected").className = "tab";
+        e.target.className = "tab tab-selected";
+        menuTab = 0;
+        updateTab();
+    }
+    document.getElementById("user-tab").onclick = function (e) {
+        document.querySelector(".tab-selected").className = "tab";
+        e.target.className = "tab tab-selected";
+        menuTab = 1;
+        updateTab();
+    }
+
+    //Category 
+    var selectedCat = 0;
+    var catButtons = document.getElementsByClassName("category-item");
+    for (var i = 0; i < catButtons.length; i++)(function (i) {
+        catButtons[i].onclick = function (e) {
+            if (i == selectedCat && i !== 5) return;
+            if (i == 5) { //6th element is random category
+                active_categories = [sub_categories[Math.floor(Math.random() * sub_categories.length)]]; //Return random sub cat
+            } else {
+                active_categories = categories[i];
+            }
+            console.log(i);
+            document.getElementsByClassName("category-item-selected")[0].className = "category-item";
+            e.target.className = "category-item category-item-selected";
+            selectedCat = i;
+            submitSearch();
+        };
+    })(i);
 
 }
