@@ -223,7 +223,7 @@ window.onload = function () {
 
 
     //On bounds change, do a radar search
-    var MAX_PLACES_LOADED = 100;
+    var MAX_PLACES_LOADED = 600;
     var searchQuery = null;
 
     /*
