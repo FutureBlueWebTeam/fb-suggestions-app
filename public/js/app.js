@@ -10,8 +10,7 @@ var categories = [
     , ["park", "bowling_alley", "campground", "gym"]
     , ["bar", "night_club", "casino"]
 ];
-var active_categories = categories[0];
-console.log(active_categories);
+var active_categories = [];
 
 var GOOGLE_API_KEY = "AIzaSyBhy9XlaP1zIdzVMPbJanvr9wLqFxT3r-U";
 
@@ -60,17 +59,20 @@ window.onload = function () {
     var placeService = new google.maps.places.PlacesService(map);
 
     //Request user's location on load
-    getUserLocation(function (lat, lng) {
+    getUserLocation(function (lat, lng, isUserLocation) {
         map.panTo({
             lat: lat
             , lng: lng
         });
-        this.marker = new google.maps.Marker({
-            map: map
-            , position: new google.maps.LatLng(lat, lng)
-            , title: "You are here!"
-            , icon: "img/guy.png"
-        });
+        if (isUserLocation){
+            this.marker = new google.maps.Marker({
+                map: map
+                , position: new google.maps.LatLng(lat, lng)
+                , title: "You are here!"
+                , icon: "img/guy.png",
+                animation: google.maps.Animation.DROP,
+            });
+        }
     });
 
     var markers = []; //Contains all active map markers
@@ -132,7 +134,7 @@ window.onload = function () {
                         });
                     }
                     this.marker.setMap(null); //Destroy existing marker
-                    this.createMarker();
+                    this.createMarker(false);
                     this.isLoaded = true;
                 } else {
                     console.warn(status)
@@ -143,13 +145,20 @@ window.onload = function () {
         /*
         Create a new marker if one does not exist
         */
-        this.createMarker = function () {
-            if (this.isLoaded || this.isDestroyed) return;
+        this.createMarker = function (isNew) {
+            if (this.isLoaded || this.isDestroyed) return;    
+            var icon = {
+                url: 'img/pin.png',
+                size: new google.maps.Size(30, 40),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(10, 30)
+            };
             this.marker = new google.maps.Marker({
                 map: map
                 , position: new google.maps.LatLng(this.lat, this.lng)
                 , title: this.name
-                , icon: "img/pin.png"
+                , icon: icon,
+                animation: isNew && markers.length < 20 && map.getZoom() >= 15 ? google.maps.Animation.DROP : null ,
             });
 
             function intToStars(x) {
@@ -192,12 +201,13 @@ window.onload = function () {
         keyword : A query string that will search name, description, type, etc
         callback : Function that will receive the partially-loaded place objects
     */
-    placeService.easyRadarSearch = function (keyword, callback) {
+    document.getElementById("search-bar").value="IBM";
+    placeService.easyRadarSearch = function (callback) {
         var request = {
             bounds: map.getBounds()
-            , keyword: keyword
+            , keyword: document.getElementById("search-bar").value
             , openNow: false
-            , types: active_categories
+            , types: searchQuery ? null : active_categories
         };
 
         //Processes the returned results for just the information we need
@@ -214,7 +224,7 @@ window.onload = function () {
                         , placeId: place.place_id
                         , isGooglePlace: true
                     });
-                    newPlace.createMarker();
+                    newPlace.createMarker(true);
                     newResults.push(newPlace);
                 }
                 callback(newResults); //We can continue with the callback as the details will reload later
@@ -228,7 +238,7 @@ window.onload = function () {
 
 
     //On bounds change, do a radar search
-    var MAX_PLACES_LOADED = 600;
+    var MAX_PLACES_LOADED = 300;
     var searchQuery = null;
 
     /*
@@ -245,8 +255,8 @@ window.onload = function () {
     /*
      * Loads new markers.
      */
-    function loadNewPlaces(query) {
-        placeService.easyRadarSearch(query, function (data) {
+    function loadNewPlaces() {
+        placeService.easyRadarSearch(function (data) {
             if (places.length > MAX_PLACES_LOADED) {
                 markers = [];
                 for (var i = 0; i < places.length; i++) {
@@ -259,7 +269,7 @@ window.onload = function () {
         });
     }
     google.maps.event.addListener(map, 'bounds_changed', function () {
-        loadNewPlaces(searchQuery, loadNewPlaces);
+        loadNewPlaces();
     });
 
 
@@ -272,7 +282,7 @@ window.onload = function () {
     function submitSearch() {
         var searchQuery = document.getElementById("search-bar").value;
         clearMarkers();
-        loadNewPlaces(searchQuery, true, loadNewPlaces);
+        loadNewPlaces();
     }
     document.getElementById("search-button").onclick = submitSearch;
 
@@ -284,6 +294,21 @@ window.onload = function () {
         if (event.keyCode == ENTER) {
             submitSearch();
             return;
+        }else{
+            getAutocompleteSuggestions(this.value, function(data){
+                var htmlStr = "";
+                for (var i=0; i<data.length && i<5; i++){
+                    htmlStr+="<p class='autocomplete-item'>"+data[i]+"</p>"
+                }
+                document.getElementById("search-suggestions").innerHTML=htmlStr;
+                var els = document.getElementsByClassName("autocomplete-item");
+                for (var i=0; i<els.length; i++){
+                    els[i].addEventListener("click", function(e){
+                        document.getElementById("search-bar").value = e.target.innerHTML;
+                        submitSearch();
+                    }, false);
+                }
+            });
         }
     }
 
@@ -310,15 +335,30 @@ window.onload = function () {
     function getUserLocation(callback) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) { //Ask for user's location
-                    callback(position.coords.latitude, position.coords.longitude);
+                    callback(position.coords.latitude, position.coords.longitude, true);
                 }
                 , function (error) { //If permission is denied...
-                    callback(43.848855, -79.338380);
+                    callback(43.848855, -79.338380, false);
                 }
             );
         } else { //If geolocation is not supported...
-            callback(43.848855, -79.338380);
+            callback(43.848855, -79.338380, false);
         }
+    }
+    
+    /*
+    Autocompletion for search
+    */
+    var autocompleteService = new google.maps.places.AutocompleteService();
+    function getAutocompleteSuggestions(input, callback){
+        if (!input) callback([]);
+        var request = { //Should we add location biasing here?
+            types: "establishment",
+            input: input,
+            key: GOOGLE_API_KEY,
+            output: "json"
+        }
+        autocompleteService.getQueryPredictions(request, function(data){data ? callback(data.map(function(p){return p.description})): callback([])});
     }
 
     //Slider code
@@ -357,7 +397,8 @@ window.onload = function () {
     }
 
     document.getElementById("cat-tab").onclick = function (e) {
-        document.querySelector(".tab-selected").className = "tab";
+        var el = document.querySelector(".tab-selected")
+        if (el) el.className = "tab";
         e.target.className = "tab tab-selected";
         menuTab = 0;
         updateTab();
@@ -370,22 +411,29 @@ window.onload = function () {
     }
 
     //Category 
-    var selectedCat = 0;
+    var selectedCat = null;
     var catButtons = document.getElementsByClassName("category-item");
     for (var i = 0; i < catButtons.length; i++)(function (i) {
         catButtons[i].onclick = function (e) {
             if (i == selectedCat && i !== 5) return;
+            searchQuery=null;
+            document.getElementById("search-bar").value="";
+            document.getElementById("search-suggestions").innerHTML="";
             if (i == 5) { //6th element is random category
                 active_categories = [sub_categories[Math.floor(Math.random() * sub_categories.length)]]; //Return random sub cat
             } else {
                 active_categories = categories[i];
             }
-            console.log(i);
-            document.getElementsByClassName("category-item-selected")[0].className = "category-item";
+            var el = document.getElementsByClassName("category-item-selected");
+            if(el.length)  el[0].className = "category-item";
             e.target.className = "category-item category-item-selected";
             selectedCat = i;
             submitSearch();
         };
     })(i);
-
+    
+    google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+        //Default search
+        submitSearch();
+    })
 }
