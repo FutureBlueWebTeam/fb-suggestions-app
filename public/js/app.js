@@ -156,7 +156,7 @@ window.onload = function () {
             this.marker = new google.maps.Marker({
                 map: map
                 , position: new google.maps.LatLng(this.lat, this.lng)
-                , title: this.name
+                , title: isNew ? null : this.name
                 , icon: icon,
                 animation: isNew && markers.length < 20 && map.getZoom() >= 15 ? google.maps.Animation.DROP : null ,
             });
