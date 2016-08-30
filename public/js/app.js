@@ -109,7 +109,7 @@ window.onload = function () {
             if (this.isLoaded || this.isDestroyed) return;
             placeService.getDetails({ //Call details api
                 placeId: this.placeId
-            }, (placeDetails, status) => { //Arrow function into callback
+            }, function(placeDetails, status){ //Bound function into callback
                 if (status === google.maps.places.PlacesServiceStatus.OK) { //Check status
                     this.name = placeDetails.name; //Update details
                     if (placeDetails.reviews && placeDetails.reviews.length > 0) {
@@ -141,7 +141,7 @@ window.onload = function () {
                 } else {
                     console.warn(status)
                 }
-            });
+            }.bind(this));
         }
 
         /*
@@ -179,17 +179,17 @@ window.onload = function () {
             this.marker.content = '<div class="infoWindowContent"><h2 class="iw-title">' + this.name + '</h2>' + imgHTML + '<p class="iw-rating">' + intToStars(this.rating) + '</p><p class="iw-desc">' + this.desc + '</p><p class="iw-phone">'+this.address+'</p><p class="iw-phone">' + this.phone + '</p><p class="iw-phone"><a target="_blank" href='+this.url+'>'+this.website+'</a></p></div>';
             markers.push(this.marker);
 
-            google.maps.event.addListener(this.marker, 'mouseover', () => {
+            google.maps.event.addListener(this.marker, 'mouseover', function(){
                 this.loadDetails();
-            });
+            }.bind(this));
 
-            google.maps.event.addListener(this.marker, 'click', () => {
+            google.maps.event.addListener(this.marker, 'click', function(){
                 infoWindow.setContent(this.marker.content);
-                window.setTimeout(() => {
+                window.setTimeout(function(){
                     infoWindow.open(map, this.marker);
-                }, 300);
+                }.bind(this), 300);
 
-            });
+            }.bind(this));
         }
 
         this.destroy = function () {
