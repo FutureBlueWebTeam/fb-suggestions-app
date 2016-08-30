@@ -41,12 +41,15 @@ button:focus {
     padding-bottom: 30px;
 }
 
-.infoWindowContent .iw-title {}
+.infoWindowContent .iw-title {
+    margin-bottom: 10px;
+}
 
 .infoWindowContent .iw-rating {
-    font-size: 18px;
+    font-size: 25px;
     color: gold;
     margin-top: 5px;
+    text-align: center;
 }
 
 .infoWindowContent .iw-desc {
@@ -55,10 +58,13 @@ button:focus {
     max-height: 5em;
     line-height: 1em;
     margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .infoWindowContent .iw-phone {
     font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .infoWindowContent .img-wrapper {
@@ -122,7 +128,7 @@ h2 {
     width: 300px;
     height: 40px;
     z-index: 2;
-    max-width: 90%;
+    max-width: 80%;
 }
 
 #search-button,
@@ -223,6 +229,7 @@ h2 {
     left: -500px;
     height: 100%;
     width: 360px;
+    max-width: 100%;
     z-index: 1;
     background: black;
     background: rgba(0, 0, 0, 0.8);
@@ -334,13 +341,16 @@ h2 {
 }
 
 .category-item {
-    width: 168px;
-    height: 168px;
+    width: 100%;
+    height: 50px;
     background: #C92A2A;
     display: inline-block;
     cursor: pointer;
-    text-align: center;
+    text-align: left;
     position: relative;
+    line-height: 50px;
+    padding-left: 10px;
+    margin-bottom: 5px;
 }
 
 .category-item:hover {
@@ -349,24 +359,17 @@ h2 {
 
 .category-item > i {
     color: white;
-    font-size: 100px;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    left: 35px;
-    top: 10px;
+    font-size: 30px;
     pointer-events: none;
+    position: relative;
+    top:6px;
 }
 
-.category-item > p {
+.category-item > span {
     color: white;
-    font-size: 30px;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    left: 30px;
-    top: 120px;
+    font-size: 20px;
     pointer-events: none;
+    padding-left: 10px;
 }
 
 .category-item-selected {
@@ -383,6 +386,7 @@ h2 {
 .tabs-wrapper .tab {
     color: white;
     width: 168px;
+    max-width: 49%;
     height: 50px;
     font-size: 1.3em;
     background: #601515;

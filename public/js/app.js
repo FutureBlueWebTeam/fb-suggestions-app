@@ -127,12 +127,14 @@ window.onload = function () {
                     this.categories = placeDetails.types;
                     this.address = placeDetails.formatted_address;
                     this.rating = placeDetails.rating;
-                    this.phone = placeDetails.formatted_phone_number;
+                    this.phone = placeDetails.formatted_phone_number || "No phone number available.";
                     if (placeDetails.photos) {
                         this.imageURL = placeDetails.photos[0].getUrl({
                             maxWidth: 500
                         });
                     }
+                    this.website = placeDetails.website || "No website available.";
+                    this.url = placeDetails.website || "javascript:void(0)";
                     this.marker.setMap(null); //Destroy existing marker
                     this.createMarker(false);
                     this.isLoaded = true;
@@ -174,7 +176,7 @@ window.onload = function () {
             } else {
                 imgHTML = "";
             }
-            this.marker.content = '<div class="infoWindowContent"><h2 class="iw-title">' + this.name + '</h2><p class="iw-rating">' + intToStars(this.rating) + '</p>' + imgHTML + '<p class="iw-desc">' + this.desc + '</p><p class="iw-phone">' + this.phone + '</p></div>';
+            this.marker.content = '<div class="infoWindowContent"><h2 class="iw-title">' + this.name + '</h2>' + imgHTML + '<p class="iw-rating">' + intToStars(this.rating) + '</p><p class="iw-desc">' + this.desc + '</p><p class="iw-phone">'+this.address+'</p><p class="iw-phone">' + this.phone + '</p><p class="iw-phone"><a target="_blank" href='+this.url+'>'+this.website+'</a></p></div>';
             markers.push(this.marker);
 
             google.maps.event.addListener(this.marker, 'mouseover', () => {
