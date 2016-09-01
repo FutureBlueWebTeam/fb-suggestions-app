@@ -298,6 +298,7 @@ window.onload = function () {
     document.getElementById("search-bar").onkeyup = function (e) {
         var ENTER = 13;
         if (event.keyCode == ENTER) {
+            document.getElementById("search-suggestions").innerHTML="";
             submitSearch();
             return;
         }else{
