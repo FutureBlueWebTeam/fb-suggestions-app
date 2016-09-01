@@ -286,18 +286,22 @@ window.onload = function () {
         clearMarkers();
         loadNewPlaces();
     }
-    document.getElementById("search-button").onclick = submitSearch;
+    document.getElementById("search-button").onclick =
+        function(){
+            submitSearch();
+            document.getElementById("search-suggestions").innerHTML="";
+    }
 
     /*
      TODO: Content assist and client-side place filtering.
      */
-    document.getElementById("search-bar").onkeyup = function () {
+    document.getElementById("search-bar").onkeyup = function (e) {
         var ENTER = 13;
         if (event.keyCode == ENTER) {
             submitSearch();
             return;
         }else{
-            getAutocompleteSuggestions(this.value, function(data){
+            getAutocompleteSuggestions(e.target.value, function(data){
                 var htmlStr = "";
                 for (var i=0; i<data.length && i<5; i++){
                     htmlStr+="<p class='autocomplete-item'>"+data[i]+"</p>"
@@ -308,6 +312,7 @@ window.onload = function () {
                     els[i].addEventListener("click", function(e){
                         document.getElementById("search-bar").value = e.target.innerHTML;
                         submitSearch();
+                        document.getElementById("search-suggestions").innerHTML="";
                     }, false);
                 }
             });
@@ -353,7 +358,10 @@ window.onload = function () {
     */
     var autocompleteService = new google.maps.places.AutocompleteService();
     function getAutocompleteSuggestions(input, callback){
-        if (!input) callback([]);
+        if (!input){
+            callback([]);
+            return;
+        }
         var request = { //Should we add location biasing here?
             types: "establishment",
             input: input,
@@ -431,6 +439,7 @@ window.onload = function () {
             e.target.className = "category-item category-item-selected";
             selectedCat = i;
             submitSearch();
+            document.getElementById("search-suggestions").innerHTML="";
         };
     })(i);
     
