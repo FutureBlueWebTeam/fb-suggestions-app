@@ -40,3 +40,7 @@ __Congratulations you are ready to start!__
   `sudo apt-get install git`
 
 ### Follow the setup instructions
+
+## Developer Notes
+
+Remember to make pull requests back to the main repo on Adam's profile every once and a while from master
